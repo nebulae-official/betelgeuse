@@ -7,3 +7,17 @@ requires-python = ">=3.9"
 dependencies = [
     "requests>=2.32.3",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+    "ruff>=0.9.7",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "tab"
+docstring-code-format = true
