@@ -1,6 +1,4 @@
-def main():
-    print("Hello from betelgeuse!")
-
+from intro import main as intro_main
 
 if __name__ == "__main__":
-    main()
+    intro_main.main()
