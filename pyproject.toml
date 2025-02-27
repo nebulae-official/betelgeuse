@@ -1,0 +1,24 @@
+[project]
+name = "betelgeuse"
+version = "0.1.0"
+description = "Betelgeuse Library"
+readme = "README.md"
+authors = [
+    { name = "Gishant", email = "khiladisngh@hotmail.com" }
+]
+requires-python = ">=3.9"
+dependencies = [
+    "requests>=2.32.3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "pytest-sugar>=1.0.0",
+    "ruff>=0.9.7",
+]
