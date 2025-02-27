@@ -3,13 +3,15 @@ name = "betelgeuse"
 version = "0.1.0"
 description = "Betelgeuse Library"
 readme = "README.md"
-authors = [
-    { name = "Gishant", email = "khiladisngh@hotmail.com" }
-]
+authors = [{ name = "Gishant", email = "khiladisngh@hotmail.com" }]
 requires-python = ">=3.9"
-dependencies = [
-    "requests>=2.32.3",
-]
+dependencies = ["colorama>=0.4.6", "requests>=2.32.3"]
+
+[project.urls]
+"Homepage" = "https://github.com/nebulae-official/betelgeuse"
+"Documentation" = "https://betelgeuse.readthedocs.io/"
+"Source" = "https://github.com/nebulae-official/betelgeuse"
+"Tracker" = "https://github.com/nebulae-official/betelgeuse/issues"
 
 [build-system]
 requires = ["hatchling"]
