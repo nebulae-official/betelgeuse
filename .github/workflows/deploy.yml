@@ -32,6 +32,7 @@ jobs:
       - name: Install dependencies
         run: |
           uv venv
+          uv pip install twine
           uv pip install -r requirements.txt
 
       # Build the package distribution files
@@ -41,7 +42,6 @@ jobs:
       # Verify the built package
       - name: Verify package
         run: |
-          uv pip install twine
           twine check dist/*
 
       # Create a GitHub release and attach the distribution files
