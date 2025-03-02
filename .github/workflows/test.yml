@@ -4,9 +4,9 @@ name: Test
 # It ensures that all tests pass and code quality standards are met before merging code
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -15,45 +15,49 @@ jobs:
     # Test across multiple Python versions to ensure compatibility
     strategy:
       matrix:
-        python-version: ['3.9', '3.10', '3.11']
+        python-version: ["3.9", "3.10", "3.11"]
 
     steps:
-    # Check out the repository code
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    
-    # Set up the Python environment with the specified version
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        
-    # Set up uv using the official action
-    - name: Install uv
-      uses: astral-sh/setup-uv@v5
-      
-    # Create virtual environment and install dependencies
-    - name: Install dependencies
-      run: |
-        uv venv
-        uv add -r requirements.txt
-        uv add -r requirements-dev.txt
-    
-    # Run ruff to check and fix code style issues
-    - name: Lint with ruff
-      run: |
-        ruff check --config ruff.toml --fix
-        ruff format
-      
-    # Run tests with coverage to verify functionality and measure test coverage
-    - name: Test with pytest and coverage
-      run: |
-        uv run pytest --cov=src/betelgeuse --cov-report=xml --cov-report=term
-    
-    # Upload coverage report to Codecov
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./coverage.xml
-        fail_ci_if_error: false
+      # Check out the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Set up the Python environment with the specified version
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # Set up uv using the official action
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      # Create virtual environment and install dependencies
+      - name: Install dependencies
+        run: |
+          uv venv
+          uv add -r requirements.txt
+          uv add -r requirements-dev.txt
+
+      # Install ruff for linting to ensure code quality standards
+      - name: Install ruff
+        uses: astral-sh/ruff-action@v3.2.1
+
+      # Run ruff to check and fix code style issues
+      - name: Lint with ruff
+        run: |
+          ruff check --config ruff.toml --fix
+          ruff format
+
+      # Run tests with coverage to verify functionality and measure test coverage
+      - name: Test with pytest and coverage
+        run: |
+          uv run pytest --cov=src/betelgeuse --cov-report=xml --cov-report=term
+
+      # Upload coverage report to Codecov
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.xml
+          fail_ci_if_error: false
