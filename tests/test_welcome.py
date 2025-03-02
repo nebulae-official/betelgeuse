@@ -1,17 +1,14 @@
 """Tests for the welcome module of the Betelgeuse CLI."""
 
-import logging
 from collections.abc import Generator
 from unittest.mock import MagicMock, patch
-import socket
 
 import pytest
-from colorama import Fore, Style
 
 from nebulae_betelgeuse.welcome import (
-    get_welcome_message, 
     display_welcome,
-    get_hostname
+    get_hostname,
+    get_welcome_message,
 )
 
 
@@ -52,9 +49,16 @@ class TestWelcome:
             hostname = get_hostname()
             assert hostname == "unknown-host"
 
-    @patch("nebulae_betelgeuse.welcome.get_welcome_message", return_value="Test welcome message")
+    @patch(
+        "nebulae_betelgeuse.welcome.get_welcome_message",
+        return_value="Test welcome message",
+    )
     @patch("nebulae_betelgeuse.welcome.logging.info")
-    def test_display_welcome(self, mock_info: MagicMock, mock_welcome: MagicMock) -> None:
+    def test_display_welcome(
+        self,
+        mock_info: MagicMock,
+        mock_welcome: MagicMock,
+    ) -> None:
         """Test that display_welcome calls logging.info with the welcome message."""
         display_welcome()
         mock_welcome.assert_called_once()

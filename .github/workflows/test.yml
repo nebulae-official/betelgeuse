@@ -38,15 +38,11 @@ jobs:
         uv venv
         uv add -r requirements.txt
         uv add -r requirements-dev.txt
-        
-    # Install ruff for linting to ensure code quality standards
-    - name: Install ruff
-      uses: astral-sh/ruff-action@v3.2.1
     
     # Run ruff to check and fix code style issues
     - name: Lint with ruff
       run: |
-        ruff check --config .ruff.toml --fix
+        ruff check --config ruff.toml --fix
         ruff format
       
     # Run tests with coverage to verify functionality and measure test coverage
