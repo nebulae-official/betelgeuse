@@ -1,0 +1,59 @@
+name: Test
+
+# This workflow runs whenever there are changes pushed to main or when PRs target the main branch
+# It ensures that all tests pass and code quality standards are met before merging code
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test and lint code
+    runs-on: ubuntu-latest
+    # Test across multiple Python versions to ensure compatibility
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10', '3.11']
+
+    steps:
+    # Check out the repository code
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    # Set up the Python environment with the specified version
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        
+    # Install UV package manager for dependency management
+    - name: Install UV
+      run: |
+        pip install uv
+        
+    # Install both production and development dependencies
+    - name: Install dependencies
+      run: |
+        # Install production dependencies
+        uv pip install -r requirements.txt
+        # Install development dependencies (pytest, ruff, etc.)
+        uv pip install -r dev-requirements.txt
+        
+    # Run code linting to ensure code quality standards
+    - name: Lint with ruff
+      run: make lint
+      
+    # Run tests with coverage to verify functionality and measure test coverage
+    - name: Test with pytest and coverage
+      run: |
+        uv run python -m pytest --cov=src/betelgeuse --cov-report=xml --cov-report=term
+    
+    # Upload coverage report to Codecov
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        fail_ci_if_error: false

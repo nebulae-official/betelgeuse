@@ -1,0 +1,65 @@
+name: Deploy Package
+
+# This workflow automatically builds and releases the package when a new version tag is pushed
+# It creates a GitHub release with the distribution files and publishes the package to PyPI
+# Tags should follow the format 'v*' (e.g., v1.0.0, v0.2.3)
+
+on:
+  push:
+    tags:
+      - 'v*'  # Will trigger on any tag that starts with 'v' like v1.0.0
+
+jobs:
+  deploy:
+    name: Build and deploy package
+    runs-on: ubuntu-latest
+    steps:
+    # Check out the repository code including the tag that triggered the workflow
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    # Set up Python environment for building the package
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.9'
+        
+    # Install required tools for building and publishing
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install uv twine
+        uv pip install -r requirements.txt
+        
+    # Build the package distribution files
+    - name: Build package
+      run: make build
+    
+    # Create a GitHub release and attach the distribution files
+    - name: Create GitHub Release
+      id: create_release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: dist/*
+        generate_release_notes: true
+        
+    # Publish the package to PyPI using the provided credentials
+    # Required secrets:
+    # - PYPI_USERNAME: Your PyPI username or __token__
+    # - PYPI_PASSWORD: Your PyPI password or token value
+    - name: Publish to PyPI
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      run: twine upload dist/*
+
+# REQUIRED SETUP:
+# To use this workflow, you need to set up the following secrets in your GitHub repository:
+# 1. Go to your GitHub repository
+# 2. Click on "Settings" > "Secrets and variables" > "Actions"
+# 3. Click on "New repository secret" and add:
+#    - Name: PYPI_USERNAME
+#      Value: Your PyPI username (or __token__ if using API token)
+#    - Name: PYPI_PASSWORD
+#      Value: Your PyPI password (or the API token value)
+# For security, it's recommended to use a PyPI API token instead of your password.
