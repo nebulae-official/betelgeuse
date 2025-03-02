@@ -39,9 +39,12 @@ jobs:
         uv add -r requirements.txt
         uv add -r requirements-dev.txt
         
-    # Run code linting to ensure code quality standards
-    - name: Lint with ruff
+    # Install ruff for linting to ensure code quality standards
+    - name: Install ruff
       uses: astral-sh/ruff-action@v3.2.1
+    
+    # Run ruff to check and fix code style issues
+    - name: Lint with ruff
       run: |
         ruff check --config .ruff.toml --fix
         ruff format
