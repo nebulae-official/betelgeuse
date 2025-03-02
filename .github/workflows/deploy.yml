@@ -13,6 +13,10 @@ jobs:
   deploy:
     name: Build and deploy package
     runs-on: ubuntu-latest
+    # Add permissions block for release creation
+    permissions:
+      contents: write
+
     steps:
       # Check out the repository code including the tag that triggered the workflow
       - name: Checkout repository
