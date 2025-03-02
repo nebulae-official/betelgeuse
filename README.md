@@ -4,8 +4,8 @@
 [![Tests](https://github.com/nebulae-official/betelgeuse/actions/workflows/test.yml/badge.svg)](https://github.com/nebulae-official/betelgeuse/actions/workflows/test.yml)
 [![Deployment](https://github.com/nebulae-official/betelgeuse/actions/workflows/deploy.yml/badge.svg)](https://github.com/nebulae-official/betelgeuse/actions/workflows/deploy.yml)
 [![Codecov](https://codecov.io/gh/nebulae-official/betelgeuse/branch/main/graph/badge.svg)](https://codecov.io/gh/nebulae-official/betelgeuse)
-[![PyPI version](https://badge.fury.io/py/betelgeuse.svg)](https://badge.fury.io/py/betelgeuse)
-[![Python Versions](https://img.shields.io/pypi/pyversions/betelgeuse.svg)](https://pypi.org/project/betelgeuse/)
+[![PyPI version](https://badge.fury.io/py/nebulae-betelgeuse.svg)](https://badge.fury.io/py/nebulae-betelgeuse)
+[![Python Versions](https://img.shields.io/pypi/pyversions/nebulae-betelgeuse.svg)](https://pypi.org/project/nebulae-betelgeuse/)
 [![License](https://img.shields.io/github/license/nebulae-official/betelgeuse.svg)](https://github.com/nebulae-official/betelgeuse/blob/main/LICENSE)
 
 <!-- PROJECT DESCRIPTION -->
@@ -23,7 +23,7 @@ Betelgeuse is a Python library that provides [brief description of what your lib
 ### Installation
 
 ```bash
-pip install betelgeuse
+pip install nebulae-betelgeuse
 ```
 
 <!-- USAGE EXAMPLES -->

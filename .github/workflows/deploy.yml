@@ -31,12 +31,17 @@ jobs:
     # Install required tools for building and publishing
     - name: Install dependencies
       run: |
-        pip install twine
         uv pip install -r requirements.txt
-        
+                
     # Build the package distribution files
     - name: Build package
       run: make build
+      
+    # Verify the built package
+    - name: Verify package
+      run: |
+        uv pip install twine
+        twine check dist/*
     
     # Create a GitHub release and attach the distribution files
     - name: Create GitHub Release
