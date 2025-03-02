@@ -41,8 +41,10 @@ jobs:
         
     # Run code linting to ensure code quality standards
     - name: Lint with ruff
+      uses: astral-sh/ruff-action@v3.2.1
       run: |
-        ruff check --config .ruff.toml
+        ruff check --config .ruff.toml --fix
+        ruff format
       
     # Run tests with coverage to verify functionality and measure test coverage
     - name: Test with pytest and coverage
