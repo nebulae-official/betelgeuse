@@ -1,11 +1,11 @@
 .PHONY: test lint build
 
 test:
-	uv run python -m pytest -v
+	uv run pytest --cov=src/betelgeuse --cov-report=xml --cov-report=term -v
 
 lint:
-	ruff check src/betelgeuse
-	ruff check tests
+	ruff check --config ruff.toml --fix
+	ruff format
 
 build:
 	uv build
