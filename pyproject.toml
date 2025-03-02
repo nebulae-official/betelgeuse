@@ -1,3 +1,4 @@
+# Core project metadata and package information
 [project]
 name = "nebulae-betelgeuse"
 version = "0.1.0"
@@ -5,25 +6,42 @@ description = "Betelgeuse Library"
 readme = "README.md"
 authors = [{ name = "Gishant", email = "khiladisngh@hotmail.com" }]
 requires-python = ">=3.9"
+# Main package dependencies
 dependencies = ["colorama>=0.4.6", "requests>=2.32.3"]
 
+# Python version compatibility and distribution metadata
+classifiers = [
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+# Project URLs for documentation, source code and issue tracking
 [project.urls]
 "Homepage" = "https://github.com/nebulae-official/betelgeuse"
 "Documentation" = "https://betelgeuse.readthedocs.io/"
 "Source" = "https://github.com/nebulae-official/betelgeuse"
 "Tracker" = "https://github.com/nebulae-official/betelgeuse/issues"
 
+# Build system configuration
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+# Hatch-specific build configuration for wheel distribution
 [tool.hatch.build.targets.wheel]
 packages = ["src/nebulae_betelgeuse"]
 
+# Development dependencies group
 [dependency-groups]
 dev = [
+    # Testing frameworks and tools
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
     "pytest-sugar>=1.0.0",
+    # Code linting and formatting
     "ruff>=0.9.9",
 ]
