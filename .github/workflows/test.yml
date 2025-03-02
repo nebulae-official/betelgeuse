@@ -32,16 +32,17 @@ jobs:
     - name: Install uv
       uses: astral-sh/setup-uv@v5
       
-    # Install both production and development dependencies
+    # Create virtual environment and install dependencies
     - name: Install dependencies
       run: |
-        uv pip install -e ".[dev]"
-        # Alternative if the above doesn't work with your project structure
-        # uv pip install -r requirements.txt -r dev-requirements.txt
+        uv venv
+        uv add -r .\requirements.txt
+        uv add -r .\requirements-dev.txt
         
     # Run code linting to ensure code quality standards
     - name: Lint with ruff
-      run: make lint
+      run: |
+        ruff check --config .ruff.toml
       
     # Run tests with coverage to verify functionality and measure test coverage
     - name: Test with pytest and coverage
