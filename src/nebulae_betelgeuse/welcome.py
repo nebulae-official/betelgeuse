@@ -14,7 +14,7 @@ import socket
 
 from colorama import Fore, Style, init
 
-from betelgeuse import __version__ as betelgeuse_version
+from nebulae_betelgeuse import __version__ as betelgeuse_version
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(message)s")

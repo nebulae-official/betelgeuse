@@ -7,7 +7,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 from colorama import Fore, Style
 
-from betelgeuse.welcome import get_welcome_message
+from nebulae_betelgeuse.welcome import get_welcome_message
 
 
 @pytest.fixture
@@ -20,7 +20,7 @@ def mock_hostname() -> Generator[MagicMock, None, None]:
 @pytest.fixture
 def mock_version() -> Generator[MagicMock, None, None]:
     """Fixture to mock the betelgeuse version."""
-    with patch("betelgeuse.welcome.betelgeuse_version", "1.2.3") as mock:
+    with patch("nebulae_betelgeuse.welcome.betelgeuse_version", "1.2.3") as mock:
         yield mock
 
 
